@@ -6,17 +6,27 @@
     <title>Document</title>
     <script>
       document.addEventListener('DOMContentLoaded', () =>{
+        
+        document.querySelector('#submit').disabled = true
+
+        document.querySelector('#task').onkeyup = () => {
+          if(document.querySelector('#task').value.length > 0){
+            document.querySelector('#submit').disabled= false;
+          }
+          else{
+            document.querySelector('#submit').disabled= true;
+          }
+        }
         document.querySelector('form').onsubmit= () => {
             const task= document.querySelector('#task').value;
           
             const li = document.createElement('li');
             li.innerHTML = task;
-              if(li===true){
+              
             document.querySelector('#tasks').append(li);
-            }
-            else{
-                alert(`you must enter a task `)
-            }
+            document.querySelector('#task').value='';
+            document.querySelector('#submit').disabled= true;
+            
 
             return false;
         }
@@ -31,7 +41,7 @@
     </ul>
     <form>
         <input type="text" placeholder="enter your task" id="task">
-        <input type="submit">
+        <input id="submit" type="submit">
     </form>
 </body>
 </html>
